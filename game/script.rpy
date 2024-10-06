@@ -25,6 +25,17 @@ define planets = {
     }
 }
 
+transform hover:
+    xpos 0.0 xanchor 0.0 ypos 0.0 yanchor 0.0
+    linear 2.0 zoom 1.05
+    linear 2.0 xpos 1.0 xanchor 1.0 ypos 1.0 yanchor 1.0
+    linear 2.0 zoom 1.0
+    xpos 1.0 xanchor 1.0 ypos 1.0 yanchor 1.0
+    linear 2.0 zoom 1.05
+    linear 2.0 xpos 0.0 xanchor 0.0 ypos 0.0 yanchor 0.0
+    linear 2.0 zoom 1.0
+    repeat
+
 transform astronaut:
     zoom 0.5
 
@@ -205,20 +216,11 @@ label liftoff:
 
 label pcb:
 
-    stop music
+    play music exogenesis
     
-    show bg pcb with fade
-
-    camera:
-        xpos 0.0 xanchor 0.0 ypos 0.0 yanchor 0.0
-        linear 2.0 zoom 1.05
-        linear 2.0 xpos 1.0 xanchor 1.0 ypos 1.0 yanchor 1.0
-        linear 2.0 zoom 1.0
-        xpos 1.0 xanchor 1.0 ypos 1.0 yanchor 1.0
-        linear 2.0 zoom 1.05
-        linear 2.0 xpos 0.0 xanchor 0.0 ypos 0.0 yanchor 0.0
-        linear 2.0 zoom 1.0
-        repeat
+    scene bg pcb at hover
+    show spaceship overlay
+    with fade
 
     a "We have arrived at Proxima Centauri b."
     a "The planet looks beautiful from here."

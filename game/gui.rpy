@@ -66,22 +66,22 @@ define gui.name_text_font = "fonts/SHPinscher_Regular.otf"
 define gui.interface_text_font = "fonts/SHPinscher_Regular.otf"
 
 ## The size of normal dialogue text.
-define gui.text_size = 33
+define gui.text_size = 33 + 10
 
 ## The size of character names.
-define gui.name_text_size = 45
+define gui.name_text_size = 45 + 10
 
 ## The size of text in the game's user interface.
-define gui.interface_text_size = 33
+define gui.interface_text_size = 33 + 10
 
 ## The size of labels in the game's user interface.
-define gui.label_text_size = 36
+define gui.label_text_size = 36 + 10
 
 ## The size of text on the notify screen.
-define gui.notify_text_size = 24
+define gui.notify_text_size = 24 + 10
 
 ## The size of the game's title.
-define gui.title_text_size = 75
+define gui.title_text_size = 75 + 10
 
 
 ## Main and Game Menus #########################################################

@@ -295,14 +295,14 @@ screen navigation():
         if main_menu:
 
             xalign 0.5
-            yalign 0.85
+            yalign 0.9
 
             textbutton _("Start") action Start()
 
         else:
 
-            xoffset 60
-            yalign 0.5
+            xoffset 100
+            yalign 0.6
 
             textbutton _("History") action ShowMenu("history")
 
