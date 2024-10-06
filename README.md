@@ -1,6 +1,8 @@
 # EXOPLORERS
 Embark on an exciting journey across the cosmos, learning about exoplanets and their components!
 
+https://youtu.be/BuxNN9FjxcM?si=YGivdor4wyZmENLN
+
 ## Game Screenshots
 ![ss1](https://github.com/leyva-bq/exoplorers/blob/29cd6a10db614b9d2bdab4d1eaee392a9a58f764/game/images/screenshots/screenshot0002.png)
 ![ss2](https://github.com/leyva-bq/exoplorers/blob/29cd6a10db614b9d2bdab4d1eaee392a9a58f764/game/images/screenshots/screenshot0003.png)
