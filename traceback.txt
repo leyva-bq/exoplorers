@@ -1,34 +1,43 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 221, in script
-    scene bg pcb with hover
-TypeError: got an unexpected keyword argument 'old_widget'
+  File "game/script.rpy", line 296, in script
+    show show text [anagram_text] at sopa_de_letras_position
+NameError: name 'anagram_text' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 221, in script
-    scene bg pcb with hover
-  File "/Applications/renpy-8.3.2-sdk/renpy/ast.py", line 1361, in execute
-    renpy.exports.with_statement(trans, paired=paired)
-  File "/Applications/renpy-8.3.2-sdk/renpy/exports/statementexports.py", line 257, in with_statement
-    return renpy.game.interface.do_with(trans, paired, clear=clear)
-  File "/Applications/renpy-8.3.2-sdk/renpy/display/core.py", line 1578, in do_with
-    return self.interact(trans_pause=True,
-  File "/Applications/renpy-8.3.2-sdk/renpy/display/core.py", line 2215, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
-  File "/Applications/renpy-8.3.2-sdk/renpy/display/core.py", line 2666, in interact_core
-    trans = instantiate_transition(None, old_root, layers_root)
-  File "/Applications/renpy-8.3.2-sdk/renpy/display/core.py", line 2575, in instantiate_transition
-    trans = self.ongoing_transition[layer](
-  File "/Applications/renpy-8.3.2-sdk/renpy/atl.py", line 623, in __call__
-    new_scope = signature.apply(args, kwargs, partial=True, apply_defaults=False)
-  File "/Applications/renpy-8.3.2-sdk/renpy/parameter.py", line 384, in apply
-    raise TypeError(
-TypeError: got an unexpected keyword argument 'old_widget'
+  File "game/script.rpy", line 296, in script
+    show show text [anagram_text] at sopa_de_letras_position
+  File "/Applications/renpy-8.3.2-sdk/renpy/ast.py", line 1111, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "/Applications/renpy-8.3.2-sdk/renpy/ast.py", line 1074, in show_imspec
+    renpy.config.show(name,
+  File "/Applications/renpy-8.3.2-sdk/renpy/exports/displayexports.py", line 477, in show
+    if not base.find_target() and renpy.config.missing_show:
+  File "/Applications/renpy-8.3.2-sdk/renpy/display/image.py", line 409, in find_target
+    error("Image '%s' not found." % ' '.join(self.name))
+  File "/Applications/renpy-8.3.2-sdk/renpy/display/image.py", line 390, in error
+    self.target = renpy.text.text.Text(msg, style="_image_error")
+  File "/Applications/renpy-8.3.2-sdk/renpy/text/text.py", line 1999, in __init__
+    self.set_text(text, scope, substitute) # type: ignore
+  File "/Applications/renpy-8.3.2-sdk/renpy/text/text.py", line 2132, in set_text
+    i, did_sub = renpy.substitutions.substitute(i, scope, substitute) # type: ignore
+  File "/Applications/renpy-8.3.2-sdk/renpy/substitutions.py", line 373, in substitute
+    s = interpolate(s, variables) # type: ignore
+  File "/Applications/renpy-8.3.2-sdk/renpy/substitutions.py", line 86, in interpolate
+    raise e
+  File "/Applications/renpy-8.3.2-sdk/renpy/substitutions.py", line 78, in interpolate
+    value = renpy.python.py_eval(code, {}, scope)
+  File "/Applications/renpy-8.3.2-sdk/renpy/python.py", line 1209, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "/Applications/renpy-8.3.2-sdk/renpy/python.py", line 1202, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "<none>", line 1, in <module>
+NameError: name 'anagram_text' is not defined
 
 macOS-14.4.1-arm64-arm-64bit arm64
 Ren'Py 8.3.2.24090902
 exoplorers 1.0
-Sun Oct  6 07:41:38 2024
+Sun Oct  6 08:58:18 2024

@@ -5,8 +5,9 @@
 
 define a = Character("Juan", color='#9933ff')
 define x = Character("???", color='#9933ff')
-define p = Character("[pname]", color="#a10606")
+define p = Character("[pname]", color="#067aa1")
 image astronaut = At("images/astronaut.png", astronaut)
+
 define planets = {
     "pcb": {
         "planet_name": "Proxima Centauri b",
@@ -25,6 +26,10 @@ define planets = {
     }
 }
 
+transform facing_left:
+    xpos 1000 ypos 100
+    xzoom -1.0
+
 transform hover:
     xpos 0.0 xanchor 0.0 ypos 0.0 yanchor 0.0
     linear 2.0 zoom 1.05
@@ -39,12 +44,12 @@ transform hover:
 transform astronaut:
     zoom 0.5
 
-transform sopa_de_letras:
-    xpos 1000
-    ypos 200
+transform sopa_de_letras_position:
+    xpos 300
+    ypos 300
 
-transform anagram:
-    xpos 1000
+transform anagram_position:
+    xpos 1200
     ypos 500
 
 # The game starts here.
@@ -222,6 +227,8 @@ label pcb:
     show spaceship overlay
     with fade
 
+    show astronaut at left with moveinleft
+
     a "We have arrived at Proxima Centauri b."
     a "The planet looks beautiful from here."
     a "Let's begin our exploration."
@@ -245,22 +252,28 @@ label explore_surface:
 
     scene bg pcb_surface with fade
 
-    show astronaut at center
+    camera:
+        xpos 0.0 xanchor 0.0 ypos 0.5 yanchor 0.5
+        ease 1.0 zoom 1.75
+        ease 1.5 xpos 1.0 xanchor 1.0
+        ease 1.0 zoom 1.0
+
+    pause 4.0
+
+    show astronaut at facing_left with moveinright
 
     a "We have landed on the surface of Proxima Centauri b."
     a "The landscape is fascinating."
     a "Let's explore and collect samples."
 
-    show astronaut at left with move
+    # show sopa_de_letras at sopa_de_letras_position
 
-    show sopa_de_letras at sopa_de_letras 
+    show text "T E S T\nT E S T" at sopa_de_letras_position
 
     p "Retrieving samples... \[Press space for hints\]"
     p "Hints: YELLOW, ROCKY, PROXIMA, LIQUID, CENTAURI"
 
     hide sopa_de_letras
-
-    show astronaut at center with move
 
     a "Wow! Seems like we found some interesting samples."
     a "Seems like we found a yellowy, rocky surface."
@@ -279,16 +292,50 @@ label analyze_atmosphere:
     a "Seems like we got the data back, but appears to be encrypted."
     a "We managed to decypher the first and last part... but not the rest."
 
-    show anagram at anagram
+    show text "W N I D\nM G A E N T\nD U I F F L C I T\nR A I I T A D O N" at anagram_position
 
-    a "Can you help us solve the rest of the data? \[Press space for hints\]"
-    a "Hints: RADIATION, WIND, MAGNET, DIFFICULT"
+    a "Can you help us solve the rest of the data?"
+
+    # anagram puzzle
+
+    $ answer = renpy.input("Word #1: ").strip().lower()
+
+    while answer != "wind":
+        p "Almost."
+        $ answer = renpy.input("Word #1: ").strip().lower()
+
+    p "Nice!"
+
+    $ answer = renpy.input("Word #2: ").strip().lower()
+
+    while answer != "magnet":
+        p "Hmm, not quite."
+        $ answer = renpy.input("Word #2: ").strip().lower()
+
+    p "Great!"
+
+    $ answer = renpy.input("Word #3: ").strip().lower()
+
+    while answer != "difficult":
+        p "Not quite."
+        $ answer = renpy.input("Word #3: ").strip().lower()
+
+    p "Awesome!"
+    p "Now... last one."
+
+    $ answer = renpy.input("Word #4: ").strip().lower()
+
+    while answer != "radiation":
+        p "This is a tricky one."
+        $ answer = renpy.input("Word #4: ").strip().lower()
+
+    p "Awesome!"
 
     hide anagram
 
     a "Wow! This data is fascinating."
-    a "We found huge signs of radiation and strong winds from its parent star."
-    a "These conditions have destroyed the planet's magnetic field, making it very difficult for life to thrive."
+    a "We found huge signs of {i}radiation{/i} and strong {i}winds{/i} from its parent star."
+    a "These conditions have destroyed the planet's {i}magnetic{/i} field, making it very {i}difficult{/i} for life to thrive."
     a "This is an important discovery for our research."
 
     jump pcb
