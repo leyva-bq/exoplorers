@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 272: expected statement.
-    at sopa_de_letras_position
-                              ^
+File "game/script.rpy", line 292: expected 'image_name_component' not found.
+    show text "bye" at truecenter onlayer "overlay"
+                                          ^
 
 Ren'Py Version: Ren'Py 8.3.2.24090902
-Sun Oct  6 08:32:14 2024
+Sun Oct  6 10:06:28 2024

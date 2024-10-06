@@ -3,7 +3,7 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define a = Character("Juan", color='#9933ff')
+define a = Character("José", color='#9933ff')
 define x = Character("???", color='#9933ff')
 define p = Character("[pname]", color="#067aa1")
 image astronaut = At("images/astronaut.png", astronaut)
@@ -14,14 +14,9 @@ define planets = {
         "coords": "4.24 light-years away",
         "star": "Proxima Centauri",
     },
-    "Exoplanet B": {
-        "planet_name": "Exoplanet B",
+    "w80b": {
+        "planet_name": "WASP-80 b",
         "coords": "10 light-years away",
-        "star": "Unknown",
-    },
-    "Exoplanet C": {
-        "planet_name": "Exoplanet C",
-        "coords": "15 light-years away",
         "star": "Unknown",
     }
 }
@@ -29,6 +24,10 @@ define planets = {
 transform facing_left:
     xpos 1000 ypos 100
     xzoom -1.0
+
+transform facing_right:
+    xpos 100 ypos 100
+    xzoom 1.0
 
 transform hover:
     xpos 0.0 xanchor 0.0 ypos 0.0 yanchor 0.0
@@ -43,10 +42,6 @@ transform hover:
 
 transform astronaut:
     zoom 0.5
-
-transform sopa_de_letras_position:
-    xpos 300
-    ypos 300
 
 transform anagram_position:
     xpos 1200
@@ -81,7 +76,7 @@ label start:
 
     show astronaut at center with moveinleft
 
-    a "Hello! My name is Juan. I’m the lead astronaut here at the NASA base on Earth."
+    a "Hello! My name is José. I’m the lead astronaut here at the NASA base on Earth."
 
     python:
         pname = renpy.input("¿What’s your name astronaut?")
@@ -90,7 +85,7 @@ label start:
     a "Welcome [pname], glad to see you here!"
     a "Now, here at NASA we do exciting work regarding all of space."
     a "We investigate space, stars, and even planets beyond our own solar system!"
-    a "We call these {b}exoplanets{/b}."
+    a "We call these {i}exoplanets{/i}."
     a "On this mission, we’re going to explore some of the most interesting exoplanets and investigate more information about them!"
     
     menu:
@@ -151,11 +146,13 @@ label planet_selection:
                 "No, I want to explore another exoplanet.":
                     jump planet_selection 
 
-        "Exoplanet B":
-            "Interesting choice! Let me tell you more about Exoplanet B."
+        "Wasp-80 b":
+            a "Interesting choice! Let me tell you more about Exoplanet B."
+            a "It has a mass similar to that of Jupiter, but it orbits its star much closer than Jupiter does to the Sun."
+            a "Its temperature is approximately 825 kelvins, wich is around 550 degrees Celsius! Scorching hot."
+            
+            jump planet_selection 
 
-        "Exoplanet C":
-            "Exciting choice! Let me tell you more about Exoplanet C."
 
 label liftoff:
     
@@ -266,18 +263,49 @@ label explore_surface:
     a "The landscape is fascinating."
     a "Let's explore and collect samples."
 
-    # show sopa_de_letras at sopa_de_letras_position
+    show astronaut at facing_right with move
 
-    show text "T E S T\nT E S T" at sopa_de_letras_position
+    show text """{b}P{/b}  {b}Y{/b}  {b}Y{/b}  E  {b}L{/b}  {b}L{/b}  O  W  {b}P{/b}  D
+{b}R{/b}  Z  F  {b}R{/b}  N  U  B  U  W  E
+O  {b}L{/b}  {b}Y{/b}  I  {b}L{/b}  {b}C{/b}  U  {b}R{/b}  T  {b}P{/b}
+X  I  M  {b}P{/b}  Q  E  N  O  K  H
+I  Q  G  {b}L{/b}  T  N  W  {b}C{/b}  A  H
+M  U  E  {b}P{/b}  H  T  I  K  Q  O
+A  I  K  X  {b}Y{/b}  A  V  {b}Y{/b}  O  {b}C{/b}
+V  D  V  O  T  U  S  A  {b}Y{/b}  Z
+N  E  F  O  {b}P{/b}  R  {b}C{/b}  T  E  X
+M  Q  C  {b}P{/b}  B  I  K  K  S  {b}L{/b}""" at anagram_position
 
-    p "Retrieving samples... \[Press space for hints\]"
-    p "Hints: YELLOW, ROCKY, PROXIMA, LIQUID, CENTAURI"
+    play sound interface
+
+    p "Retrieving samples..."
+    p "Hmm... I'm looking at 5 samples starting with Y, R, P, L, and C."
+
+    # sopa de letras puzzle
+
+    $ words = ["yellow", "rocky", "liquid", "proxima", "centauri"]
+    $ words_found = []
+
+    while words:
+        $ word = renpy.input("Word found:").strip().lower()
+
+        while word not in words:
+            p "I don't think I found that word."
+            p "Hmm... I'm looking at 5 samples starting with Y, R, P, L, and C."
+            p "Words found: [words_found]"
+            $ word = renpy.input("Word found:").strip().lower()
+        
+        p "Great! I found that word."
+        $ words_found.append(word)
+        $ words.remove(word)
+        p "Words found: [words_found]"
 
     hide sopa_de_letras
 
     a "Wow! Seems like we found some interesting samples."
-    a "Seems like we found a yellowy, rocky surface."
-    a "We also found signs liquid water! This is an amazing discovery."
+    a "Seems like we found a {i}yellowy{/i}, {i}rocky{/i} surface."
+    a "The heat from {i}Proxima Centauri{/i} is also intense..."
+    a "We also found signs {i}liquid{/i} water! This is an amazing discovery."
     a "Let's head back to the spaceship and analyze these samples."
 
     jump pcb
@@ -288,6 +316,9 @@ label analyze_atmosphere:
     a "Spectroscopy is a powerful tool that allows us to determine the composition of a planet
     by analyzing how light interacts with its atmosphere."
     a "Let's start the analysis."
+
+    play sound interface
+
     "Running analysis..."
     a "Seems like we got the data back, but appears to be encrypted."
     a "We managed to decypher the first and last part... but not the rest."
