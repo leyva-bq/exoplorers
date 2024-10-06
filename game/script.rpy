@@ -218,7 +218,7 @@ label liftoff:
 
 label pcb:
 
-    play music exogenesis
+    play music space_bgm
     
     scene bg pcb at hover
     show spaceship overlay
